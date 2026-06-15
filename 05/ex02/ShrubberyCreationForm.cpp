@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zserobia <zserobia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/07 14:17:03 by zserobia          #+#    #+#             */
+/*   Updated: 2025/04/10 13:08:31 by zserobia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ShrubberyCreationForm.hpp"
+#include <iostream>
+#include <fstream>
+
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), _target("default") {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), _target(other._target) {}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
+    if (this != &other) {
+        _target = other._target;
+    }
+    return *this;
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
+//std::ofstream — это объект для работы с файлами. Он создаёт и записывает текст в новый файл.
+void ShrubberyCreationForm::executeAction() const {
+    std::ofstream file((_target + "_shrubbery").c_str()); // Открываем файл для записи
+    if (!file) {
+        std::cerr << "Error opening file!" << std::endl;
+        return;
+    }
+
+    file << "     ^     \n"
+         << "    ^^^    \n"
+         << "   ^^^^^   \n"
+         << "  ^^^^^^^  \n"
+         << " ^^^^^^^^^ \n"
+         << "^^^^^^^^^^^ \n"
+         << "     |||   \n";
+    file.close();
+}
+
+std::string ShrubberyCreationForm::getTarget() const {
+    return _target;
+}
+
+
+// Перегрузка оператора <<
+std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& form) {
+    os << "Shrubbery Creation Form for " << form.getTarget();
+    return os;
+}
+
+void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
+    AForm::execute(executor);
+    executeAction();
+}
