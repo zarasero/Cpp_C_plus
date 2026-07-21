@@ -233,3 +233,30 @@ cd 05/ex03 && make && ./intern
 
 # Module 06 — ScalarConverter
 cd 06/ex00 && make && ./convert 42.0f
+
+# Module 07 — Array
+cd 07/ex02 && make && ./array
+
+# Module 08 — Span
+cd 08/ex01 && make && ./span
+
+# Module 09 — Bitcoin Exchange
+cd 09/ex00 && make && ./btc input.txt
+```
+
+All programs are compiled with the following flags:
+- `-Wall -Wextra -Werror` — Strict warning policy (warnings are treated as errors)
+- `-std=c++98` — Uses the C++98 standard (except Module 09 which may use C++11 or later for STL algorithms)
+- `-g` — Includes debug symbols for use with debuggers like `gdb` or `lldb`
+
+---
+
+## Requirements
+
+- **Compiler:** `c++` (g++ or clang++) with C++98 support (or later where specified)
+- **Build tool:** `make`
+- **Operating system:** Linux (developed and tested on Ubuntu/Debian-based systems)
+- **Dependencies:** No external libraries required — only the C++ standard library
+
+---
+
